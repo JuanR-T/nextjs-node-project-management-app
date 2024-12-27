@@ -1,12 +1,16 @@
 "use client";
-import { useAppSelector } from "@/app/redux";
-import { LockIcon } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/app/redux";
+import { setIsSidebarCollapsed } from "@/state";
+import { AlertCircle, AlertOctagon, AlertTriangle, Briefcase, ChevronDown, ChevronUp, HomeIcon, Layers3, LockIcon, LucideIcon, Search, Settings, ShieldAlert, User, Users, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const Sidebar = () => {
     const [showProjects, setShowProjects] = useState(true);
     const [showPriority, setShowPriority] = useState(true);
+    const dispatch = useAppDispatch();
     const isSidebarCollapsed = useAppSelector(
         (state) => state.global.isSidebarCollapsed,
     );
@@ -22,6 +26,11 @@ const Sidebar = () => {
                     <div className="text-xl font-bold text-gray-800 dark:text-white">
                         EDIT LIST
                     </div>
+                    {isSidebarCollapsed ? null :
+                        <button className="py-3" onClick={() => { dispatch(setIsSidebarCollapsed(!isSidebarCollapsed)) }}>
+                            <X className="h-6 w-6 text-gray-800 hover:text-gray-500 dark:text-white" />
+                        </button>
+                    }
                 </div>
                 {/**Team */}
                 <div className="flex items-center gap-5 border-y-[1.5px] border-gray-200 px-8 py-4 dark:border-gray-700">
@@ -34,9 +43,73 @@ const Sidebar = () => {
                         <p className="text-xs text-gray-500">Private</p>
                     </div>
                 </div>
+                {/**Links */}
+                <nav className="z-10 w-full">
+                    <SidebarLink href="/" icon={HomeIcon} label="Home" />
+                    <SidebarLink href="/timeline" icon={Briefcase} label="Timeline" />
+                    <SidebarLink href="/search" icon={Search} label="Search" />
+                    <SidebarLink href="/settings" icon={Settings} label="Settings" />
+                    <SidebarLink href="/users" icon={User} label="Users" />
+                    <SidebarLink href="/teams" icon={Users} label="Teams" />
+                </nav>
+
+                <button className="flex w-full items-center justify-between px-8 py-3 text-gray-500" onClick={() => setShowPriority((prev) => !prev)}>
+                    <span className="">Priority</span>
+                    {showPriority ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+                </button>
+                {showPriority && (
+                    <>
+                        <SidebarLink href="/priority/urgent" icon={AlertCircle} label="Urgent" />
+                        <SidebarLink href="/priority/high" icon={ShieldAlert} label="High" />
+                        <SidebarLink href="/priority/medium" icon={AlertTriangle} label="Medium" />
+                        <SidebarLink href="/priority/low" icon={AlertOctagon} label="Low" />
+                        <SidebarLink href="/priority/backlog" icon={Layers3} label="Backlog" />
+                    </>
+                )}
+                {/**Projects links*/}
+                <button className="flex w-full items-center justify-between px-8 py-3 text-gray-500" onClick={() => setShowProjects((prev) => !prev)}>
+                    <span className="">Projects</span>
+                    {showProjects ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+                </button>
+                {/**Priority links*/}
+
+
             </div>
         </div>
     )
 }
+interface SidebarLinkProps {
+    href: string;
+    icon: LucideIcon;
+    label: string;
+};
 
-export default Sidebar
+const SidebarLink = ({
+    href,
+    icon: Icon,
+    label,
+}: SidebarLinkProps) => {
+    const pathname = usePathname();
+    const isActive = pathname === href || (pathname === "/" && href === "/dashboard");
+    const screenWidth = window.innerWidth;
+
+    return (
+        <Link href={href} className="w-full">
+            <div
+                className={`relative flex cursor-pointer items-center gap-3 transition-colors hover:bg-gray-100 dark:bg-black dark:hover:bg-gray-700 ${isActive ? "bg-gray-100 text-white dark:bg-gray-600" : ""
+                    } justify-start px-8 py-3`}
+            >
+                {isActive && (
+                    <div className="absolute left-0 top-0 h-[100%] w-[5px] bg-blue-200" />
+                )}
+
+                <Icon className="h-6 w-6 text-gray-800 dark:text-gray-100" />
+                <span className={`font-medium text-gray-800 dark:text-gray-100`}>
+                    {label}
+                </span>
+            </div>
+        </Link>
+    )
+};
+
+export default Sidebar;
