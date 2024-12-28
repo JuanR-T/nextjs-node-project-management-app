@@ -12,7 +12,7 @@ export const getProjects = async (
         res.json(projects);
     } catch (error: any) {
         console.error(error);
-        res.status(500).json({ error: "An error occurred while fetching projects" });
+        res.status(500).json({ message: `Error fetching projects: ${error.message}` });
     }
 }
 export const createProject = async (
@@ -32,7 +32,7 @@ export const createProject = async (
         res.status(201).json(newProject);
     } catch (error: any) {
         console.error(error);
-        res.status(500).json({ error: "An error occurred while creating project" });
+        res.status(500).json({ message: `Error creating a project: ${error.message}` });
     }
 }
 
