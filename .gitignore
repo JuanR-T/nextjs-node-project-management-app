@@ -11,7 +11,9 @@ build/
 
 # Ignore log files
 *.log
-
+# Ignore dist folders within client and server folders
+client/dist/
+server/dist/
 # Ignore editor-specific files
 .vscode/
 .idea/
