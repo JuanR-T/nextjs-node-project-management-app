@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import projectRoutes from './routes/project.routes';
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,8 @@ app.use(cors());
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
+
+app.use("/projects", projectRoutes)
 
 // Start server
 
