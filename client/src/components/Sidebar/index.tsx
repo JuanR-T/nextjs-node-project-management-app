@@ -1,6 +1,7 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
+import { useGetProjectsQuery } from "@/state/api";
 import { AlertCircle, AlertOctagon, AlertTriangle, Briefcase, ChevronDown, ChevronUp, HomeIcon, Layers3, LockIcon, LucideIcon, Search, Settings, ShieldAlert, User, Users, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +11,8 @@ import { useState } from "react";
 const Sidebar = () => {
     const [showProjects, setShowProjects] = useState(true);
     const [showPriority, setShowPriority] = useState(true);
+
+    const { data: projects } = useGetProjectsQuery();
     const dispatch = useAppDispatch();
     const isSidebarCollapsed = useAppSelector(
         (state) => state.global.isSidebarCollapsed,
@@ -57,6 +60,7 @@ const Sidebar = () => {
                     <span className="">Priority</span>
                     {showPriority ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
                 </button>
+                {/**Priority links*/}
                 {showPriority && (
                     <>
                         <SidebarLink href="/priority/urgent" icon={AlertCircle} label="Urgent" />
@@ -71,9 +75,9 @@ const Sidebar = () => {
                     <span className="">Projects</span>
                     {showProjects ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
                 </button>
-                {/**Priority links*/}
-
-
+                {showProjects && projects?.map((project) => (
+                    <SidebarLink key={project.id} href={`/project/${project.id}`} icon={Briefcase} label={project.name} />
+                ))};
             </div>
         </div>
     )
