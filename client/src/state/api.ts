@@ -1,4 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+    createApi,
+    fetchBaseQuery,
+} from "@reduxjs/toolkit/query/react";
 
 export interface Project {
     id: number;
@@ -30,7 +33,7 @@ export interface User {
 }
 export interface Attachment {
     id: number;
-    fileUrl: string;
+    fileURL: string;
     fileName: string;
     taskId: number;
     uploadedById: number;
@@ -54,7 +57,12 @@ export interface Task {
     comments?: Comment[];
     attachments?: Attachment[];
 }
-
+export interface Comment {
+    id: number;
+    taskId: number;
+    text: string;
+    userId: number;
+}
 export const api = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({
@@ -79,7 +87,10 @@ export const api = createApi({
             query: ({ projectId }) => `tasks?projectId=${projectId}`,
             providesTags: (result) =>
                 result
-                    ? result.map(({ id }) => ({ type: "Tasks" as const, id }))
+                    ? result.map(({ id }) => ({
+                          type: "Tasks" as const,
+                          id,
+                      }))
                     : [{ type: "Tasks" as const }],
         }),
         createTask: build.mutation<Task, Partial<Task>>({
@@ -96,7 +107,7 @@ export const api = createApi({
             { taskId: number; status: string }
         >({
             query: ({ taskId, status }) => ({
-                url: "tasks/${taskId}/status",
+                url: `tasks/${taskId}/status`,
                 method: "PATCH",
                 body: { status },
             }),
@@ -112,4 +123,5 @@ export const {
     useCreateProjectMutation,
     useGetTasksQuery,
     useCreateTaskMutation,
+    useUpdateTaskStatusMutation,
 } = api;
