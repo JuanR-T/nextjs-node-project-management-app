@@ -1,22 +1,23 @@
 "use client";
 import ModalNewTask from "@/components/ModalNewTask";
-import useAsync from "@/lib/useAsync";
-import { useState } from "react";
+import React, { useState } from "react";
 import BoardView from "../boardView";
+import ListView from "../listView";
 import ProjectHeader from "../projectHeader";
+import TableView from "../tableView";
 
 type Props = {
-    params: { id: string }
+    params: Promise<{ id: string }>
 }
 
 const Project = ({ params }: Props) => {
-    const { id } = params;
-    const { value: resolvedParams, loading, error } = useAsync(async () => {
-        return Promise.resolve(params);
-    }, [id]);
+    const resolvedParams = React.use(params);
+    const { id } = resolvedParams;
+    console.log(params, "params")
+
     const [activeTab, setActiveTab] = useState("Board");
     const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
-    console.log(isModalNewTaskOpen, "isModalNewTaskOpen")
+    console.log(activeTab, "activeTab")
     return (
         <div>
             <ModalNewTask
@@ -26,6 +27,9 @@ const Project = ({ params }: Props) => {
             />
             <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
             {activeTab === "Board" && <BoardView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />}
+            {activeTab === "List" && <ListView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />}
+            {/* {activeTab === "Timeline" && <TimelineView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />} */}
+            {activeTab === "Table" && <TableView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />}
         </div>
     )
 }
