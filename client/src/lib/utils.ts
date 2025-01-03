@@ -1,3 +1,5 @@
+import { parseISO } from "date-fns";
+
 export const dataGridClassNames =
     "border border-gray-200 bg-white shadow dark:border-stroke-dark dark:bg-dark-secondary dark:text-gray-200";
 
@@ -28,5 +30,26 @@ export const dataGridSxStyles = (isDarkMode: boolean) => {
         "& .MuiDataGrid-withBorderColor": {
             borderColor: `${isDarkMode ? "#2d3135" : "e5e7eb"}`,
         },
+    };
+};
+
+export const formatDate = ({
+    startDate,
+    dueDate,
+}: {
+    startDate: string | undefined;
+    dueDate: string | undefined;
+}) => {
+    const formattedDate = (date: string | undefined) => {
+        if (date) {
+            return parseISO(
+                date.replace(/^(\d{4})-(\d{2})-(\d{2})/, "$1-$3-$2"),
+            ).getTime();
+        }
+    };
+
+    return {
+        startDate: formattedDate(startDate),
+        dueDate: formattedDate(dueDate),
     };
 };
