@@ -79,7 +79,7 @@ export const api = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
     }),
-    tagTypes: ["Projects", "Tasks", "Users", "Teams"],
+    tagTypes: ["Projects", "Tasks", "Users", "Teams", "UserTasks"],
     endpoints: (build) => ({
         getProjects: build.query<Project[], void>({
             query: () => "projects",
@@ -111,7 +111,10 @@ export const api = createApi({
                 body: task,
             }),
             //This invalidates the tasks tag so that the getTasks query will refetch the data after creating a new task
-            invalidatesTags: [{ type: "Tasks" }],
+            invalidatesTags: [
+                { type: "UserTasks" },
+                { type: "Tasks" },
+            ],
         }),
         updateTaskStatus: build.mutation<
             Task,
@@ -137,6 +140,14 @@ export const api = createApi({
             query: () => "teams",
             providesTags: ["Teams"],
         }),
+        getTasksByUser: build.query<Task[], number>({
+            query: (userId) => `tasks/user/${userId}`,
+            providesTags: (result) =>
+                result?.map(({ id }) => ({
+                    type: "UserTasks",
+                    id,
+                })) || [{ type: "UserTasks" }],
+        }),
     }),
 });
 
@@ -149,4 +160,5 @@ export const {
     useSearchQuery,
     useGetUsersQuery,
     useGetTeamsQuery,
+    useGetTasksByUserQuery,
 } = api;
