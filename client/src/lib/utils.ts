@@ -32,7 +32,10 @@ export const dataGridSxStyles = (isDarkMode: boolean) => {
         },
     };
 };
-
+const isValidDateFormat = (dateStr: string): boolean => {
+    const regex = /^\d{4}\/\d{2}\/\d{2}$/;
+    return regex.test(dateStr);
+};
 export const formatDate = ({
     startDate,
     dueDate,
@@ -41,10 +44,12 @@ export const formatDate = ({
     dueDate: string | undefined;
 }) => {
     const formattedDate = (date: string | undefined) => {
-        if (date) {
+        if (date && isValidDateFormat(date)) {
             return parseISO(
                 date.replace(/^(\d{4})-(\d{2})-(\d{2})/, "$1-$3-$2"),
             ).getTime();
+        } else {
+            return parseISO(date ?? "").getTime();
         }
     };
 

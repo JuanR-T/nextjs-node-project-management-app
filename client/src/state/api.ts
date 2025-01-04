@@ -100,7 +100,7 @@ export const api = createApi({
                 body: task,
             }),
             //This invalidates the tasks tag so that the getTasks query will refetch the data after creating a new task
-            invalidatesTags: ["Tasks"],
+            invalidatesTags: [{ type: "Tasks" }],
         }),
         updateTaskStatus: build.mutation<
             Task,

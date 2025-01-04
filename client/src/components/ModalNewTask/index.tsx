@@ -1,7 +1,7 @@
 import Modal from "@/components/Modal";
 import { Priority, Status, useCreateTaskMutation } from "@/state/api";
 import { formatISO } from "date-fns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
     isOpen: boolean;
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
-    const [createTask, { isLoading }] = useCreateTaskMutation();
+    const [createTask, { isLoading, isSuccess, reset }] = useCreateTaskMutation();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [status, setStatus] = useState<Status>(Status.ToDo);
@@ -47,15 +47,20 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
     };
 
     const isFormValid = () => {
-        return title && authorUserId && !(id !== null || projectId);
+        return title && authorUserId && id !== null;
     };
-
     const selectStyles =
         "mb-4 block w-full rounded border border-gray-300 px-3 py-2 dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
 
     const inputStyles =
         "w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
 
+    useEffect(() => {
+        if (isSuccess) {
+            onClose();
+            reset();
+        }
+    }, [isSuccess, onClose]);
     return (
         <Modal isOpen={isOpen} onClose={onClose} name="Create New Task">
             <form
@@ -83,7 +88,7 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
                         className={selectStyles}
                         value={status}
                         onChange={(e) =>
-                            setStatus(Status[e.target.value as keyof typeof Status])
+                            setStatus(e.target.value as Status)
                         }
                     >
                         <option value="">Select Status</option>
