@@ -145,7 +145,6 @@ const Task = ({ task }: TaskProps) => {
         : "";
 
     const numberOfComments = (task.comments && task.comments.length) || 0;
-    console.log(task.comments, "task.comments");
     const PriorityTag = ({ priority }: { priority: TaskType["priority"] }) => (
         <div
             className={`rounded-full px-2 py-1 text-xs font-semibold ${priority === "Urgent"

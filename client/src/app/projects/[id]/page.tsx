@@ -13,11 +13,9 @@ type Props = {
 const Project = ({ params }: Props) => {
     const resolvedParams = React.use(params);
     const { id } = resolvedParams;
-    console.log(params, "params")
 
     const [activeTab, setActiveTab] = useState("Board");
     const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
-    console.log(activeTab, "activeTab")
     return (
         <div>
             <ModalNewTask
