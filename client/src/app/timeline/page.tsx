@@ -1,18 +1,19 @@
-import { useGetTasksQuery } from "@/state/api";
+"use client";
+import { useGetProjectsQuery } from "@/state/api";
 import "gantt-schedule-timeline-calendar/dist/style.css";
 import { useCallback, useEffect } from "react";
-import { formatDate } from "../../../lib/utils";
+import { formatDate } from "../../lib/utils";
 interface TimelineProps {
     id: string;
     setIsModalNewTaskOpen: (isOpen: boolean) => void;
 }
 
-export const TimelineView = ({ id, setIsModalNewTaskOpen }: TimelineProps) => {
+const Timeline = ({ id, setIsModalNewTaskOpen }: TimelineProps) => {
     const {
-        data: tasks,
+        data: projects,
         error,
         isLoading,
-    } = useGetTasksQuery({ projectId: Number(id) });
+    } = useGetProjectsQuery();
 
     var GSTC: any;
     var gstc: any;
@@ -26,16 +27,16 @@ export const TimelineView = ({ id, setIsModalNewTaskOpen }: TimelineProps) => {
         const ItemResizing = (await import("gantt-schedule-timeline-calendar/dist/plugins/item-resizing.esm.min.js")).Plugin;
         const ItemMovement = (await import("gantt-schedule-timeline-calendar/dist/plugins/item-movement.esm.min.js")).Plugin;
         const generateRows = () => {
-            if (!tasks) {
+            if (!projects) {
                 console.error("Tasks are undefined or null");
                 return {};
             }
             const rows: import("gantt-schedule-timeline-calendar").Rows = {};
-            tasks?.map((task) => {
-                const id = GSTC.api.GSTCID(task.id.toString());
+            projects?.map((project) => {
+                const id = GSTC.api.GSTCID(project.id.toString());
                 rows[id] = {
                     id,
-                    label: task.title,
+                    label: project.name,
                 };
             });
             return rows;
@@ -44,14 +45,14 @@ export const TimelineView = ({ id, setIsModalNewTaskOpen }: TimelineProps) => {
         const generateItems = () => {
             const items: import("gantt-schedule-timeline-calendar").Items = {};
 
-            tasks?.map((task) => {
-                const id = GSTC.api.GSTCID(task.id.toString());
-                const rowId = GSTC.api.GSTCID(task.id.toString());
-                const formmattedDates = formatDate({ startDate: task.startDate, dueDate: task.dueDate });
+            projects?.map((project) => {
+                const id = GSTC.api.GSTCID(project.id.toString());
+                const rowId = GSTC.api.GSTCID(project.id.toString());
+                const formmattedDates = formatDate({ startDate: project.startDate, dueDate: project.endDate });
 
                 items[id] = {
                     id,
-                    label: task.title,
+                    label: project.name,
                     rowId,
                     style: { "backgroundColor": "#4a4a4a" },
                     time: {
@@ -107,12 +108,12 @@ export const TimelineView = ({ id, setIsModalNewTaskOpen }: TimelineProps) => {
     }
     const generateTimelineCallback = useCallback((element: any) => {
         if (!element) return;
-        if (isLoading || error || !tasks) {
-            console.error("Tasks not ready, cannot initialize GSTC.");
+        if (isLoading || error || !projects) {
+            console.error("Projects not ready, cannot initialize GSTC.");
             return;
         }
         initializeGSTC(element);
-    }, [isLoading, error, tasks]);
+    }, [isLoading, error, projects]);
 
     useEffect(() => {
         return () => {
@@ -128,3 +129,5 @@ export const TimelineView = ({ id, setIsModalNewTaskOpen }: TimelineProps) => {
         </div>
     );
 }
+
+export default Timeline;
