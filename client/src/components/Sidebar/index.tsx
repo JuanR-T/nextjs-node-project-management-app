@@ -48,7 +48,7 @@ const Sidebar = () => {
                 </div>
                 {/**Links */}
                 <nav className="z-10 w-full">
-                    <SidebarLink href="/" icon={HomeIcon} label="Home" />
+                    <SidebarLink href="/home" icon={HomeIcon} label="Home" />
                     <SidebarLink href="/timeline" icon={Briefcase} label="Timeline" />
                     <SidebarLink href="/search" icon={Search} label="Search" />
                     <SidebarLink href="/settings" icon={Settings} label="Settings" />
