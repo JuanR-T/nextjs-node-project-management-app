@@ -6,6 +6,7 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import projectRoutes from './routes/project.routes';
+import searchRoutes from './routes/search.routes';
 import taskRoutes from './routes/task.routes';
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 
 app.use("/projects", projectRoutes);
 app.use("/tasks", taskRoutes);
+app.use("/search", searchRoutes);
 
 // Start server
 
