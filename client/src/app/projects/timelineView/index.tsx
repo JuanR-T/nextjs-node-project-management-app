@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/app/redux";
 import { useGetTasksQuery } from "@/state/api";
 import "gantt-schedule-timeline-calendar/dist/style.css";
 import { useCallback, useEffect } from "react";
@@ -8,6 +9,8 @@ interface TimelineProps {
 }
 
 export const Timeline = ({ id, setIsModalNewTaskOpen }: TimelineProps) => {
+    const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
+    console.log("document.documentElement.classList", document.documentElement);
     const {
         data: tasks,
         error,
@@ -105,7 +108,6 @@ export const Timeline = ({ id, setIsModalNewTaskOpen }: TimelineProps) => {
             element,
             state,
         });
-        console.log("lcgstc", gstc);
     }
     const generateTimelineCallback = useCallback((element: any) => {
         if (!element) return;
@@ -124,34 +126,9 @@ export const Timeline = ({ id, setIsModalNewTaskOpen }: TimelineProps) => {
         };
     });
 
-    function updateFirstRow() {
-        if (!GSTC || !state) return;
-        state.update(`config.list.rows.${GSTC.api.GSTCID("0")}`, (row: any) => {
-            row.label = "Changed dynamically";
-            return row;
-        });
-    }
-
     return (
-        <div className="container">
-            <button onClick={updateFirstRow}>Change row 1 label</button>
-            <hr />
+        <div className="px-4 !dark:bg-dark-bg !dark:text-white">
             <div id="gstc" ref={generateTimelineCallback}></div>
-
-            <style jsx global>{`
-                html,
-                body {
-                padding: 0;
-                margin: 0;
-                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
-                    Droid Sans, Helvetica Neue, sans-serif;
-                }
-
-                * {
-                    box-sizing: border-box;
-                }
-                `}
-            </style>
         </div>
     );
 }

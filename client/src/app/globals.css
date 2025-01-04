@@ -5,16 +5,27 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html,
 body,
 #root,
 .app {
-  height: 100%;
-  width: 100%;
-  @apply text-sm;
-  @apply bg-white;
-  @apply dark:bg-black;
+    height: 100%;
+    width: 100%;
+    @apply text-sm;
+    @apply bg-white;
+    @apply dark:bg-black;
+}
+
+@layer utilities {
+    .gstc,
+    .gstc__list,
+    .gstc__chart,
+    .gstc__list-column-header-content,
+    .gstc__chart-calendar,
+    .gstc__chart-calendar div {
+        @apply dark:bg-black dark:text-white;
+    }
 }
