@@ -1,7 +1,7 @@
 import Modal from "@/components/Modal";
 import { useCreateProjectMutation } from "@/state/api";
 import { formatISO } from "date-fns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
     isOpen: boolean;
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const ModalNewProject = ({ isOpen, onClose }: Props) => {
-    const [createProject, { isLoading }] = useCreateProjectMutation();
+    const [createProject, { isLoading, isSuccess, reset }] = useCreateProjectMutation();
     const [projectName, setProjectName] = useState("");
     const [description, setDescription] = useState("");
     const [startDate, setStartDate] = useState("");
@@ -39,6 +39,13 @@ const ModalNewProject = ({ isOpen, onClose }: Props) => {
 
     const inputStyles =
         "w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
+
+    useEffect(() => {
+        if (isSuccess) {
+            onClose();
+            reset();
+        }
+    }, [isSuccess, onClose]);
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} name="Create New Project">
