@@ -237,7 +237,7 @@ const Task = ({ task }: TaskProps) => {
                         {task.assignee && (
                             <Image
                                 key={task.assignee.userId}
-                                src={`/${task.assignee.profilePictureUrl!}`}
+                                src={`https://project-management-mind-hive-s3-images.s3.eu-west-3.amazonaws.com/${task.assignee.profilePictureUrl!}`}
                                 alt={task.assignee.username}
                                 width={30}
                                 height={30}
@@ -247,7 +247,7 @@ const Task = ({ task }: TaskProps) => {
                         {task.author && (
                             <Image
                                 key={task.author.userId}
-                                src={`/${task.author.profilePictureUrl!}`}
+                                src={`https://project-management-mind-hive-s3-images.s3.eu-west-3.amazonaws.com/${task.author.profilePictureUrl!}`}
                                 alt={task.author.username}
                                 width={30}
                                 height={30}
@@ -276,7 +276,7 @@ const Task = ({ task }: TaskProps) => {
                                     //TODO - add comment author query
                                     <Image
                                         key={comment.userId}
-                                        src={`/${task.author.profilePictureUrl!}`}
+                                        src={`https://project-management-mind-hive-s3-images.s3.eu-west-3.amazonaws.com/${task.author.profilePictureUrl!}`}
                                         alt={task.author.username}
                                         width={30}
                                         height={30}

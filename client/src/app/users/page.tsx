@@ -30,7 +30,7 @@ const columns: GridColDef[] = [
             <div className="flex h-full w-full items-center justify-center">
                 <div className="h-9 w-9">
                     <Image
-                        src={`/${params.value}`}
+                        src={`https://project-management-mind-hive-s3-images.s3.eu-west-3.amazonaws.com/${params.value}`}
                         alt={params.row.username}
                         width={100}
                         height={50}
