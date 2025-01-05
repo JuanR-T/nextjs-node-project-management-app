@@ -76,7 +76,7 @@ const Sidebar = () => {
                     {showProjects ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
                 </button>
                 {showProjects && projects?.map((project) => (
-                    <SidebarLink key={project.id} href={`/projects/${project.id}`} icon={Briefcase} label={project.name} />
+                    <SidebarLink key={project.id} href={`/projects/${project.id}/${project.name}`} icon={Briefcase} label={project.name} />
                 ))};
             </div>
         </div>

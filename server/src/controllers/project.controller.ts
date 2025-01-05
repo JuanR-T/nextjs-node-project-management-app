@@ -36,3 +36,15 @@ export const createProject = async (
     }
 }
 
+export const deleteProject = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { id } = req.params;
+        const deletedProject = await prisma.project.delete({
+            where: { id: Number(id) },
+        });
+        res.status(201).json(deletedProject);
+    } catch (error: any) {
+        console.error(error);
+        res.status(500).json({ message: `Error deleting a project: ${error.message}` });
+    }
+}

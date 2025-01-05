@@ -94,6 +94,13 @@ export const api = createApi({
             //This invalidates the Projects tag so that the getProjects query will refetch the data after creating a new project
             invalidatesTags: ["Projects"],
         }),
+        deleteProject: build.mutation<Project, number>({
+            query: (projectId) => ({
+                url: `projects/${projectId}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["Projects"],
+        }),
         getTasks: build.query<Task[], { projectId: number }>({
             query: ({ projectId }) => `tasks?projectId=${projectId}`,
             providesTags: (result) =>
@@ -154,6 +161,7 @@ export const api = createApi({
 export const {
     useGetProjectsQuery,
     useCreateProjectMutation,
+    useDeleteProjectMutation,
     useGetTasksQuery,
     useCreateTaskMutation,
     useUpdateTaskStatusMutation,
