@@ -3,12 +3,8 @@ import { useGetProjectsQuery } from "@/state/api";
 import "gantt-schedule-timeline-calendar/dist/style.css";
 import { useCallback, useEffect } from "react";
 import { formatDate } from "../../lib/utils";
-interface TimelineProps {
-    id: string;
-    setIsModalNewTaskOpen: (isOpen: boolean) => void;
-}
 
-const Timeline = ({ id, setIsModalNewTaskOpen }: TimelineProps) => {
+const Timeline = () => {
     const {
         data: projects,
         error,
