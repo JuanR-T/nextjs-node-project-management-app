@@ -1,6 +1,6 @@
-import { Task as TaskType, useGetTasksQuery, useUpdateTaskStatusMutation } from "@/state/api";
+import { Task as TaskType, useDeleteTaskMutation, useGetTasksQuery, useUpdateTaskStatusMutation } from "@/state/api";
 import { format } from "date-fns";
-import { EllipsisVertical, MessageSquareMore, MessageSquareOff, Plus } from "lucide-react";
+import { EllipsisVertical, MessageSquareMore, MessageSquareOff, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
@@ -127,6 +127,7 @@ type TaskProps = {
 
 const Task = ({ task }: TaskProps) => {
     const [showComments, setShowComments] = React.useState(false);
+    const [deleteProject, { isLoading }] = useDeleteTaskMutation();
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "task",
         item: { id: task.id },
@@ -161,11 +162,16 @@ const Task = ({ task }: TaskProps) => {
             {priority}
         </div>
     );
-
+    const handleTaskDeletion = async (id: number) => {
+        try {
+            await deleteProject(id).unwrap();
+        } catch (error) {
+            console.error('Failed to delete the project:', error);
+        }
+    };
     const handleShowComments = () => {
         setShowComments((prev) => !prev);
     };
-
     return (
         <div
             ref={(instance) => {
@@ -202,6 +208,9 @@ const Task = ({ task }: TaskProps) => {
                     </div>
                     <button className="flex h-6 w-4 flex-shrink-0 items-center justify-center dark:text-neutral-500">
                         <EllipsisVertical size={26} />
+                    </button>
+                    <button onClick={() => (handleTaskDeletion(task.id))} className=" flex h-6 w-4 flex-shrink-0 items-center justify-center dark:text-neutral-500">
+                        <Trash2 className="hover:text-neutral-700" size={26} />
                     </button>
                 </div>
 
