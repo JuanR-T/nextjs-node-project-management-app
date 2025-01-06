@@ -25,7 +25,7 @@ app.use(cors());
 // Routes
 
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('Home Route');
 });
 
 app.use("/projects", projectRoutes);
