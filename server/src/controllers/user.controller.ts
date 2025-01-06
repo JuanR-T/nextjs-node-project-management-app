@@ -40,6 +40,7 @@ export const createUser = async (req: Request, res: Response) => {
       profilePictureUrl = "i1.jpg",
       teamId = 1,
     } = req.body;
+    console.log(username, cognitoId, profilePictureUrl, teamId, "username, cognitoId, profilePictureUrl, teamId");
     const newUser = await prisma.user.create({
       data: {
         username,
@@ -48,6 +49,7 @@ export const createUser = async (req: Request, res: Response) => {
         teamId,
       },
     });
+    console.log(newUser, "newUser");
     res.json({ message: "User Created Successfully", newUser });
   } catch (error: any) {
     res
