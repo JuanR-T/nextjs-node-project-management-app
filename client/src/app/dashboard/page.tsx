@@ -1,13 +1,12 @@
 "use client";
 
-import Header from "@/components/Header";
 import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
 import {
     Priority,
     Project,
     Task,
     useGetProjectsQuery,
-    useGetTasksQuery,
+    useGetTasksQuery
 } from "@/state/api";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import {
@@ -21,7 +20,7 @@ import {
     ResponsiveContainer,
     Tooltip,
     XAxis,
-    YAxis,
+    YAxis
 } from "recharts";
 import { useAppSelector } from "../redux";
 
@@ -92,10 +91,33 @@ const HomePage = () => {
 
     return (
         <div className="container h-full w-[100%] bg-gray-100 bg-transparent p-8">
-            <Header name="Project Management Dashboard" />
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary">
-                    <h3 className="mb-4 text-lg font-semibold dark:text-white">
+                <div className="rounded-lg md:col-span-2 bg-white p-8 shadow-xl dark:bg-dark-secondary">
+                    <h2 className="mb-4 text-lg text-center text-slate-900 font-semibold dark:text-white">
+                        🚀 Welcome to MindHive's Management Hub ! 🚀
+                        <br />
+                    </h2>
+                    <p className="mb-4 text-justify font-normal dark:text-white">
+                        MindHive's Management Hub is a modern project management tool that helps teams plan, track, and manage their work.
+                        <strong> I am a developer who is passionate about building tools that help teams work better together.</strong>
+                        <br />
+                        <br />
+                        <hr></hr>
+                        <h3 className="py-4 font-bold text-slate-900 dark:text-white">📋 Features</h3>
+                        It streamlines workflows, enhances team collaboration, and boosts productivity with features like a dynamic dashboard <strong>NextJS / NodeJS / Mui/ DnDKit</strong>, efficient task and project tracking, customizable workflows, and tasks priority management.
+                        <br />
+                        <br />
+                        <hr></hr>
+                        <h3 className="py-4 font-bold text-slate-900 dark:text-white">⚡️ Powered by AWS services</h3>
+                        This app is designed for safety, using AWS best services like, secure user authentication <strong>AWS Cognito</strong>,
+                        It ensures data security <strong>AWS RDS</strong> and scalability <strong>AWS Amplify</strong> for the frontend, <strong>AWS EC2</strong> for the backend.
+                        <br />
+                        <br />
+                        This SaaS is a reliable and robust solution for modern project management.
+                    </p>
+                </div>
+                <div className="rounded-lg bg-white p-4 shadow-xl dark:bg-dark-secondary">
+                    <h3 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">
                         Task Priority Distribution
                     </h3>
                     <ResponsiveContainer width="100%" height={300}>
@@ -117,8 +139,8 @@ const HomePage = () => {
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
-                <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary">
-                    <h3 className="mb-4 text-lg font-semibold dark:text-white">
+                <div className="rounded-lg bg-white p-4 shadow-xl dark:bg-dark-secondary">
+                    <h3 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">
                         Project Status
                     </h3>
                     <ResponsiveContainer width="100%" height={300}>
@@ -136,8 +158,8 @@ const HomePage = () => {
                         </PieChart>
                     </ResponsiveContainer>
                 </div>
-                <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary md:col-span-2">
-                    <h3 className="mb-4 text-lg font-semibold dark:text-white">
+                <div className="rounded-lg bg-white p-4 shadow-xl dark:bg-dark-secondary md:col-span-2">
+                    <h3 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">
                         Your Tasks
                     </h3>
                     <div style={{ height: 400, width: "100%" }}>
