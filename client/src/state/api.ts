@@ -104,16 +104,16 @@ export const api = createApi({
                     const user = await getCurrentUser();
                     const session = await fetchAuthSession();
                     if (!session) throw new Error("No session found");
-                    const { userSub } = session;
+                    const { userSub: cognitoId } = session;
                     const { accessToken } = session.tokens ?? {};
 
                     const userDetailsResponse = await fetchWithBQ(
-                        `users/${userSub}`,
+                        `users/${cognitoId}`,
                     );
                     const userDetails =
                         userDetailsResponse.data as User;
 
-                    return { data: { user, userSub, userDetails } };
+                    return { data: { user, cognitoId, userDetails } };
                 } catch (error: any) {
                     return {
                         error:
@@ -192,6 +192,12 @@ export const api = createApi({
             query: () => "users",
             providesTags: ["Users"],
         }),
+        getUser: build.query<User, string>({
+            query: (cognitoId) => `users/${cognitoId}`,
+            providesTags: (result) => [
+                { type: "Users", id: result?.userId },
+            ],
+        }),
         getTeams: build.query<Team[], void>({
             query: () => "teams",
             providesTags: ["Teams"],
@@ -217,6 +223,7 @@ export const {
     useDeleteTaskMutation,
     useSearchQuery,
     useGetUsersQuery,
+    useGetUserQuery,
     useGetTeamsQuery,
     useGetTasksByUserQuery,
     useGetAuthUserQuery,
