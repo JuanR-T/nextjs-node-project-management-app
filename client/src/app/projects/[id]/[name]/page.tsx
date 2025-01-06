@@ -5,7 +5,8 @@ import BoardView from "../../boardView";
 import ListView from "../../listView";
 import ProjectHeader from "../../projectHeader";
 import TableView from "../../tableView";
-import { TimelineView } from "../../timelineView";
+import TimelineView from "../../timelineView";
+
 type Props = {
     params: Promise<{ id: string, name: string }>;
 }

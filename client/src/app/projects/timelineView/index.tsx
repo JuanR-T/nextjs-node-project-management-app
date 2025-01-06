@@ -1,130 +1,96 @@
+import { useAppSelector } from "@/app/redux";
 import { useGetTasksQuery } from "@/state/api";
-import "gantt-schedule-timeline-calendar/dist/style.css";
-import { useCallback, useEffect } from "react";
-import { formatDate } from "../../../lib/utils";
-interface TimelineProps {
+import { DisplayOption, Gantt, ViewMode } from "gantt-task-react";
+import "gantt-task-react/dist/index.css";
+import React, { useMemo, useState } from "react";
+
+type Props = {
     id: string;
     setIsModalNewTaskOpen: (isOpen: boolean) => void;
-}
+};
 
-export const TimelineView = ({ id, setIsModalNewTaskOpen }: TimelineProps) => {
+type TaskTypeItems = "task" | "milestone" | "project";
+
+const TimelineView = ({ id, setIsModalNewTaskOpen }: Props) => {
+    const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
     const {
         data: tasks,
         error,
         isLoading,
     } = useGetTasksQuery({ projectId: Number(id) });
 
-    var GSTC: any;
-    var gstc: any;
-    var state: any;
-
-    const initializeGSTC = async (element: any) => {
-        GSTC = (await import("gantt-schedule-timeline-calendar")).default;
-        const TimelinePointer = (await import("gantt-schedule-timeline-calendar/dist/plugins/timeline-pointer.esm.min.js"))
-            .Plugin;
-        const Selection = (await import("gantt-schedule-timeline-calendar/dist/plugins/selection.esm.min.js")).Plugin;
-        const ItemResizing = (await import("gantt-schedule-timeline-calendar/dist/plugins/item-resizing.esm.min.js")).Plugin;
-        const ItemMovement = (await import("gantt-schedule-timeline-calendar/dist/plugins/item-movement.esm.min.js")).Plugin;
-        const generateRows = () => {
-            if (!tasks) {
-                console.error("Tasks are undefined or null");
-                return {};
-            }
-            const rows: import("gantt-schedule-timeline-calendar").Rows = {};
-            tasks?.map((task) => {
-                const id = GSTC.api.GSTCID(task.id.toString());
-                rows[id] = {
-                    id,
-                    label: task.title,
-                };
-            });
-            return rows;
-        }
-
-        const generateItems = () => {
-            const items: import("gantt-schedule-timeline-calendar").Items = {};
-
-            tasks?.map((task) => {
-                const id = GSTC.api.GSTCID(task.id.toString());
-                const rowId = GSTC.api.GSTCID(task.id.toString());
-                const formmattedDates = formatDate({ startDate: task.startDate, dueDate: task.dueDate });
-
-                items[id] = {
-                    id,
-                    label: task.title,
-                    rowId,
-                    style: { "backgroundColor": "#4a4a4a" },
-                    time: {
-                        start: formmattedDates.startDate ?? 0,
-                        end: formmattedDates.dueDate ?? 0,
-                    },
-                };
-            })
-            return items;
-        }
-        const rows = generateRows();
-        const items = generateItems();
-        const config = {
-            licenseKey: "====BEGIN LICENSE KEY====\nXOfH/lnVASM6et4Co473t9jPIvhmQ/l0X3Ewog30VudX6GVkOB0n3oDx42NtADJ8HjYrhfXKSNu5EMRb5KzCLvMt/pu7xugjbvpyI1glE7Ha6E5VZwRpb4AC8T1KBF67FKAgaI7YFeOtPFROSCKrW5la38jbE5fo+q2N6wAfEti8la2ie6/7U2V+SdJPqkm/mLY/JBHdvDHoUduwe4zgqBUYLTNUgX6aKdlhpZPuHfj2SMeB/tcTJfH48rN1mgGkNkAT9ovROwI7ReLrdlHrHmJ1UwZZnAfxAC3ftIjgTEHsd/f+JrjW6t+kL6Ef1tT1eQ2DPFLJlhluTD91AsZMUg==||U2FsdGVkX1/SWWqU9YmxtM0T6Nm5mClKwqTaoF9wgZd9rNw2xs4hnY8Ilv8DZtFyNt92xym3eB6WA605N5llLm0D68EQtU9ci1rTEDopZ1ODzcqtTVSoFEloNPFSfW6LTIC9+2LSVBeeHXoLEQiLYHWihHu10Xll3KsH9iBObDACDm1PT7IV4uWvNpNeuKJc\npY3C5SG+3sHRX1aeMnHlKLhaIsOdw2IexjvMqocVpfRpX4wnsabNA0VJ3k95zUPS3vTtSegeDhwbl6j+/FZcGk9i+gAy6LuetlKuARjPYn2LH5Be3Ah+ggSBPlxf3JW9rtWNdUoFByHTcFlhzlU9HnpnBUrgcVMhCQ7SAjN9h2NMGmCr10Rn4OE0WtelNqYVig7KmENaPvFT+k2I0cYZ4KWwxxsQNKbjEAxJxrzK4HkaczCvyQbzj4Ppxx/0q+Cns44OeyWcwYD/vSaJm4Kptwpr+L4y5BoSO/WeqhSUQQ85nvOhtE0pSH/ZXYo3pqjPdQRfNm6NFeBl2lwTmZUEuw==\n====END LICENSE KEY====",
-            plugins: [TimelinePointer(), Selection(), ItemResizing(), ItemMovement()],
-            list: {
-                columns: {
-                    data: {
-                        [GSTC.api.GSTCID("id")]: {
-                            id: GSTC.api.GSTCID("id"),
-                            width: 60,
-                            data: ({ row }: any) => GSTC.api.sourceID(row.id),
-                            header: {
-                                content: "ID",
-                            },
-                        },
-                        [GSTC.api.GSTCID("label")]: {
-                            id: GSTC.api.GSTCID("label"),
-                            width: 200,
-                            data: "label",
-                            header: {
-                                content: "Label",
-                            },
-                        },
-                    },
-                },
-                rows,
-            },
-            chart: {
-                items,
-            },
-        };
-
-        state = GSTC.api.stateFromConfig(config);
-        if (!element || !state) {
-            console.error("GSTC or state is undefined or null");
-            return;
-        }
-        gstc = GSTC({
-            element,
-            state,
-        });
-    }
-    const generateTimelineCallback = useCallback((element: any) => {
-        if (!element) return;
-        if (isLoading || error || !tasks) {
-            console.error("Tasks not ready, cannot initialize GSTC.");
-            return;
-        }
-        initializeGSTC(element);
-    }, [isLoading, error, tasks]);
-
-    useEffect(() => {
-        return () => {
-            if (gstc) {
-                gstc.destroy();
-            }
-        };
+    const [displayOptions, setDisplayOptions] = useState<DisplayOption>({
+        viewMode: ViewMode.Month,
+        locale: "en-US",
     });
 
+    const ganttTasks = useMemo(() => {
+        return (
+            tasks?.map((task) => ({
+                start: new Date(task.startDate as string),
+                end: new Date(task.dueDate as string),
+                name: task.title,
+                id: `Task-${task.id}`,
+                type: "task" as TaskTypeItems,
+                progress: task.points ? (task.points / 10) * 100 : 0,
+                isDisabled: false,
+            })) || []
+        );
+    }, [tasks]);
+
+    const handleViewModeChange = (
+        event: React.ChangeEvent<HTMLSelectElement>,
+    ) => {
+        setDisplayOptions((prev) => ({
+            ...prev,
+            viewMode: event.target.value as ViewMode,
+        }));
+    };
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error || !tasks) return <div>An error occurred while fetching tasks</div>;
+
     return (
-        <div className="px-4 !dark:bg-dark-bg !dark:text-white">
-            <div id="gstc" ref={generateTimelineCallback}></div>
+        <div className="px-4 xl:px-6">
+            <div className="flex flex-wrap items-center justify-between gap-2 py-5">
+                <h1 className="me-2 text-lg font-bold dark:text-white">
+                    Project Tasks Timeline
+                </h1>
+                <div className="relative inline-block w-64">
+                    <select
+                        className="focus:shadow-outline block w-full appearance-none rounded border border-gray-400 bg-white px-4 py-2 pr-8 leading-tight shadow hover:border-gray-500 focus:outline-none dark:border-dark-secondary dark:bg-dark-secondary dark:text-white"
+                        value={displayOptions.viewMode}
+                        onChange={handleViewModeChange}
+                    >
+                        <option value={ViewMode.Day}>Day</option>
+                        <option value={ViewMode.Week}>Week</option>
+                        <option value={ViewMode.Month}>Month</option>
+                    </select>
+                </div>
+            </div>
+
+            <div className="overflow-hidden rounded-md bg-white shadow dark:bg-dark-secondary dark:text-white">
+                <div className="timeline">
+                    <Gantt
+                        tasks={ganttTasks}
+                        {...displayOptions}
+                        columnWidth={displayOptions.viewMode === ViewMode.Month ? 150 : 100}
+                        listCellWidth="100px"
+                        barBackgroundColor={isDarkMode ? "#101214" : "#aeb8c2"}
+                        barBackgroundSelectedColor={isDarkMode ? "#000" : "#9ba1a6"}
+                    />
+                </div>
+                <div className="px-4 pb-5 pt-1">
+                    <button
+                        className="flex items-center rounded bg-blue-primary px-3 py-2 text-white hover:bg-blue-600"
+                        onClick={() => setIsModalNewTaskOpen(true)}
+                    >
+                        Add New Task
+                    </button>
+                </div>
+            </div>
         </div>
     );
-}
+};
+
+export default TimelineView;
