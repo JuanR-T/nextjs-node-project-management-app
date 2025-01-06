@@ -2,10 +2,9 @@ import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsDarkMode, setIsSidebarCollapsed } from "@/state";
 import { useGetAuthUserQuery } from "@/state/api";
 import { signOut } from "aws-amplify/auth";
-import { Menu, Moon, Search, Settings, Sun, User } from "lucide-react";
+import { Menu, Moon, Settings, Sun, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
 const Navbar = () => {
     const dispatch = useAppDispatch();
     const isSidebarCollapsed = useAppSelector(
@@ -25,22 +24,35 @@ const Navbar = () => {
     return (
         <div className="flex items-center justify-between bg-white px-4 py-3 dark:bg-black">
             {/* Search Bar */}
-            <div className="flex items-center gap-8">
-                {!isSidebarCollapsed ? null : (
-                    <button
-                        onClick={() => dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))}
-                    >
-                        <Menu className="h-8 w-8 dark:text-white" />
-                    </button>
-                )}
-                <div className="relative flex h-min w-[200px]">
-                    <Search className="absolute left-[4px] top-1/2 mr-2 h-5 w-5 -translate-y-1/2 transform cursor-pointer dark:text-white" />
-                    <input
-                        className="w-full rounded border-none bg-gray-100 p-2 pl-8 placeholder-gray-500 focus:border-transparent focus:outline-none dark:bg-gray-700 dark:text-white dark:placeholder-white"
-                        type="search"
-                        placeholder="Search..."
-                    />
+            <div className="flex items-center">
+                <div className="flex items-center gap-8">
+                    {!isSidebarCollapsed ? null : (
+                        <button
+                            onClick={() => dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))}
+                        >
+                            <Menu className="h-8 w-8 dark:text-white" />
+                        </button>
+                    )}
+
                 </div>
+                <Link
+                    href="https://github.com/JuanR-T"
+                    target="_blank"
+                    className={
+                        isDarkMode
+                            ? `h-full w-full text-slate-900 flex items-center rounded p-2 dark:hover:bg-gray-700 dark:text-white`
+                            : `h-full w-full text-slate-900 flex items-center rounded p-2 hover:bg-gray-100 dark:text-white`
+                    }
+                >
+                    <Image src="https://project-management-mind-hive-s3-images.s3.eu-west-3.amazonaws.com/github.svg"
+                        alt="github-logo"
+                        width={24}
+                        height={24}
+                        className="h-full filter invert-0 dark:invert"
+                    />
+
+                    <span className="px-2 font-bold">JuanR-T</span>
+                </Link>
             </div>
 
             {/* Icons */}
