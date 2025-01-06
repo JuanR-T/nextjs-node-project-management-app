@@ -12,6 +12,9 @@ export const dataGridSxStyles = (isDarkMode: boolean) => {
                 borderColor: `${isDarkMode ? "#2d3135" : ""}`,
             },
         },
+        "& .MuiDataGrid-virtualScrollerContent": {
+            color: `${isDarkMode ? "#e5e7eb" : "#000000"}`,
+        },
         "& .MuiIconbutton-root": {
             color: `${isDarkMode ? "#a3a3a3" : ""}`,
         },

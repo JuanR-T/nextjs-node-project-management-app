@@ -11,7 +11,7 @@ const Header = ({
     isSmallText = false
 }: Props) => {
     return (
-        <div className="mb-5 justify-center flex w-full items-center ">
+        <div className="mb-5 justify-between flex w-full items-center ">
             <h1 className={`${isSmallText ? 'text-lg' : 'text-2xl'} text-black px-2 font-semibold dark:text-white`}>
                 {name}
             </h1>

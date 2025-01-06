@@ -90,7 +90,7 @@ const HomePage = () => {
         };
 
     return (
-        <div className="container h-full w-[100%] bg-gray-100 bg-transparent p-8">
+        <div className="bg-gray-100 bg-transparent p-8">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="rounded-lg md:col-span-2 bg-white p-8 shadow-xl dark:bg-dark-secondary">
                     <h2 className="mb-4 text-lg text-center text-slate-900 font-semibold dark:text-white">

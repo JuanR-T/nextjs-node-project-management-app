@@ -76,6 +76,7 @@ const TimelineView = ({ id, setIsModalNewTaskOpen }: Props) => {
                         {...displayOptions}
                         columnWidth={displayOptions.viewMode === ViewMode.Month ? 150 : 100}
                         listCellWidth="100px"
+                        projectBackgroundColor={isDarkMode ? "#101214" : "#1f2937"}
                         barBackgroundColor={isDarkMode ? "#101214" : "#aeb8c2"}
                         barBackgroundSelectedColor={isDarkMode ? "#000" : "#9ba1a6"}
                     />
