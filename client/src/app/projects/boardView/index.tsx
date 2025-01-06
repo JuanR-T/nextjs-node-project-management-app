@@ -22,7 +22,6 @@ const BoardView = ({ id, setIsModalNewTaskOpen }: BoardProps) => {
     const [updateTaskStatus] = useUpdateTaskStatusMutation();
 
     const moveTask = (taskId: number, toStatus: string) => {
-        console.log(taskId, "taskId");
         updateTaskStatus({ taskId, status: toStatus });
     };
 
