@@ -1,6 +1,7 @@
-import { Authenticator } from "@aws-amplify/ui-react";
+import { Authenticator, Text, View } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
+import Image from "next/image";
 
 Amplify.configure({
     Auth: {
@@ -44,7 +45,25 @@ const formFields = {
 const AuthProvider = ({ children }: any) => {
     return (
         <div>
-            <Authenticator formFields={formFields}>
+            <Authenticator formFields={formFields}
+                components={{
+                    Header() {
+                        return (
+                            <>
+                                <View className="flex justify-center align-center">
+                                    <Image
+                                        alt="MindHive Logo"
+                                        src="https://project-management-mind-hive-s3-images.s3.eu-west-3.amazonaws.com/auth-logo.jpg"
+                                        height={120}
+                                        width={120}
+                                    />
+                                </View>
+                                <Text className="flex justify-center text-xl text-[#047d95] font-mono font-semibold pb-8">The Management Hub you need</Text>
+                            </>
+                        );
+                    },
+                }}
+            >
                 {({ user }: any) =>
                     user ? (
                         <div>{children}</div>
