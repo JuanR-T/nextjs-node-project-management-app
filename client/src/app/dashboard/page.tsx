@@ -108,7 +108,7 @@ const HomePage = () => {
                         <br />
                         <br />
                         <hr></hr>
-                        <h3 className="py-4 font-bold text-slate-900 dark:text-white">⚡️ Powered by AWS services</h3>
+                        <h3 className="py-4 font-bold text-slate-900 dark:text-white">⚡️ Powered by AWS Services</h3>
                         This app is designed for safety, using AWS best services like, secure user authentication <strong>AWS Cognito</strong>,
                         It ensures data security <strong>AWS RDS</strong> and scalability <strong>AWS Amplify</strong> for the frontend, <strong>AWS EC2</strong> for the backend.
                         <br />
