@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
-<div align="center">
+<h1 align="center">
   <a href="https://main.d25yzk9j3fwt2y.amplifyapp.com/dashboard">🚀 Live Demo - Hosted on AWS Amplify 🚀</a>
-</div>
+</h1>
 <br />
 <div align="center">
     <a href="https://github.com/JuanR-T/nextjs-node-project-management-app">
@@ -26,10 +26,13 @@
       <br />
       <hr></hr>
       <h3 className="py-4 font-bold text-slate-900 dark:text-white">⚡️ Powered by AWS services</h3>
-      This app is designed for safety, using AWS best services like, secure user authentication <strong>AWS Cognito</strong>,
-      It ensures data security <strong>AWS RDS</strong> and scalability <strong>AWS Amplify</strong> for the frontend, <strong>AWS EC2</strong> for the backend.
-      <br />
-      This SaaS is a reliable and robust solution for modern project management.
+      <span>This SaaS is a reliable and robust solution for modern project management.</span>
+      <ul>
+        <li><strong>AWS Cognito</strong></li>
+        <li><strong>AWS RDS - hosted postgresql database</strong></li>
+        <li><strong>AWS Amplify hosted frontend</strong></li>
+        <li><strong>AWS EC2 - hosted backend</strong></li>
+      </ul>
   </p>
 </div>
 <br />
@@ -39,43 +42,33 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
+      <a href="#tech-stack">Tech stack</a>
     </li>
     <li><a href="#screenshots">Screenshots</a></li>
-    <li><a href="#contribution">Contribution</a></li>
+    <li><a href="#contributing">Contribution</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
-<!-- ABOUT THE PROJECT -->
 
-## About The Project
-
+<!-- Tech stack -->
+## Tech Stack
+<span id="tech-stack">This is what I used to build this app</span>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Built With
+[![Next][Next.js]][Next-url]
+[![React][React.js]][React-url]
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Typescript](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/postgresql-32638D?style=for-the-badge&logo=postgresql&logoColor=white)
+![Prisma](https://img.shields.io/badge/prisma-0A0A15?style=for-the-badge&logo=prisma&logoColor=white)
+![Redux](https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)
+![DaisyUI](https://img.shields.io/badge/daisyui-202A37?style=for-the-badge&logo=daisyui&logoColor=white)
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-* ![Typescript](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-* ![PostgreSQL](https://img.shields.io/badge/postgresql-32638D?style=for-the-badge&logo=postgresql&logoColor=white)
-* ![Prisma](https://img.shields.io/badge/prisma-0A0A15?style=for-the-badge&logo=prisma&logoColor=white)
-* ![Redux](https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)
-* ![DaisyUI](https://img.shields.io/badge/daisyui-202A37?style=for-the-badge&logo=daisyui&logoColor=white)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
 ## Screenshots
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <table id="screenshots" align="center">
   <tr>
@@ -90,10 +83,10 @@
   </tr>
 </table>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 ## Contributing
+<p id="contributing" align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -106,8 +99,6 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/feature-name`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- CONTACT -->
 ## Contact
 
@@ -115,7 +106,7 @@ Juan Restrepo Torres - j.restrepo.dev@gmail.com
 
 Project Link: https://main.d25yzk9j3fwt2y.amplifyapp.com/dashboard
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p id="contact" align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -151,4 +142,3 @@ Project Link: https://main.d25yzk9j3fwt2y.amplifyapp.com/dashboard
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com 
-[logo](https://github.com/user-attachments/assets/00e8e656-1825-41ea-b2f7-464c2490ebe1)<?xml version="1.0" standalone="no"?>
