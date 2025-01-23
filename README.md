@@ -9,14 +9,20 @@
     </a>
 </div>
 <div align="left">
-  <h3 align="center">MindHive Management Hub</h3>
+  <h3 align="center">MindHive's Management Hub</h3>
   <p className="mb-4 font-normal dark:text-white">
       MindHive's Management Hub is a modern project management tool that helps teams plan, track, and manage their work.
       <strong> I am a developer who is passionate about building tools that help teams work better together.</strong>
       <br />
       <hr></hr>
       <h3 className="py-4 font-bold text-slate-900 dark:text-white">📋 Features</h3>
-      It streamlines workflows, enhances team collaboration, and boosts productivity with features like a dynamic dashboard <strong>NextJS / NodeJS / Mui/ DnDKit</strong>, efficient task and project tracking, customizable workflows, and tasks priority management.
+      <ul>
+        <li>Dynamic dashboard - <strong>NextJS / NodeJS / Mui / DnDKit</strong></li>
+        <li>Tasks priority management - <strong>Rest Api CRUD</strong></li>
+        <li>Light/Dark mode - <strong>DaisyUI</strong></li>
+        <li>Customizable workflows</li>
+        <li>Boosts productivity</li>
+      </ul>
       <br />
       <hr></hr>
       <h3 className="py-4 font-bold text-slate-900 dark:text-white">⚡️ Powered by AWS services</h3>
@@ -44,7 +50,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
     <li><a href="#contribution">Contribution</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -60,24 +66,27 @@
 * [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
 * ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+* ![Typescript](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+* ![PostgreSQL](https://img.shields.io/badge/postgresql-32638D?style=for-the-badge&logo=postgresql&logoColor=white)
+* ![Prisma](https://img.shields.io/badge/prisma-0A0A15?style=for-the-badge&logo=prisma&logoColor=white)
+* ![Redux](https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)
+* ![DaisyUI](https://img.shields.io/badge/daisyui-202A37?style=for-the-badge&logo=daisyui&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Screenshots
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-<table align="center">
+<table id="screenshots" align="center">
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/ea7446b8-80c1-453b-967b-5c71c83b735a" alt="Image 1" width="200"/></td>
-    <td><img src="https://github.com/user-attachments/assets/ea7446b8-80c1-453b-967b-5c71c83b735a" alt="Image 2" width="200"/></td>
-    <td><img src="https://github.com/user-attachments/assets/ea7446b8-80c1-453b-967b-5c71c83b735a" alt="Image 3" width="200"/></td>
+    <td><img width="400" alt="mindhive-usages-1" src="https://github.com/user-attachments/assets/48df91e1-0d5b-4b5e-8149-178ac49b0172" /></td>
+    <td><img width="400" alt="mindhive-usages-2" src="https://github.com/user-attachments/assets/68f55ebb-fca9-4c61-8a10-ba93521bd76a" /></td>
+    <td><img width="400" alt="mindhives-usages-3" src="https://github.com/user-attachments/assets/5e640faa-11dd-4e6a-9fcd-f6bf99c7bee7" /></td>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/ea7446b8-80c1-453b-967b-5c71c83b735a" alt="Image 4" width="200"/></td>
-    <td><img src="https://github.com/user-attachments/assets/ea7446b8-80c1-453b-967b-5c71c83b735a" alt="Image 5" width="200"/></td>
-    <td><img src="https://github.com/user-attachments/assets/ea7446b8-80c1-453b-967b-5c71c83b735a" alt="Image 6" width="200"/></td>
+    <td><img width="400" alt="mindhives-usages-4" src="https://github.com/user-attachments/assets/bb0337b7-3605-464a-95cd-3410c0be2e73" /></td>
+    <td><img width="400" alt="mindhives-usages-5" src="https://github.com/user-attachments/assets/1e0f7c72-1bf3-48f3-8cc5-c15a0a86719c" /></td>
+    <td><img width="400" alt="mindhives-usages-6" src="https://github.com/user-attachments/assets/466011e3-0210-47a4-8c82-d498b602be2c" /></td>
   </tr>
 </table>
 
