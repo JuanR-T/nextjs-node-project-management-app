@@ -5,7 +5,7 @@
 <br />
 <div align="center">
     <a href="https://github.com/JuanR-T/nextjs-node-project-management-app">
-        <img src="https://github.com/user-attachments/assets/7160755c-f34d-4bfc-96a4-23f9105d72ec" alt="Logo" width="300" height="300" />
+        <img src="https://github.com/user-attachments/assets/7160755c-f34d-4bfc-96a4-23f9105d72ec" alt="Logo" width="150" height="150" />
     </a>
 </div>
 <div align="left">
